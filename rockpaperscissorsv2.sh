@@ -3,7 +3,7 @@
 
 # Rock paper scissors game
 
-#Input your choice
+
 
 #Sets the goal to 3 - until loop
 wins=0
@@ -17,7 +17,8 @@ do
 
 
 
-
+#Input your choice
+echo ---------------------------------------
 read -p "Rock Paper Scissors.. " userchoice
 
 
