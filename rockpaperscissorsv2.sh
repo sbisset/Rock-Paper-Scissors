@@ -24,13 +24,6 @@ read -p "Rock Paper Scissors.. " userchoice
 
 
 
-#if [[ "$userchoice" != "[Rr][0o][Cc][Kk]" && "$userchoice" != "[Ss][cC][Ii][Ss][Ss][Oo][Rr][Ss]" && "$userchoice" != "[Pp][Aa][Pp][Ee][Rr]" ]]
-#then 
-	#echo " You played $userchoice" 
-#else 
-	
-	#exit 1
-#fi
 
 
 
