@@ -1,139 +1,110 @@
 #!/bin/bash
 
 
-# Rock paper scissors game
-
-
-
-#Sets the goal to 3 - until loop
-wins=0
 compwins=0
-goal=3
+userwins=0
+goal=5
 
-echo "Its the first to 3 wins!"
-until [ "$wins" = 3  -o "$compwins" = 3 ]
-do
+RPSarray=("1" "2" "3")
+function computer {
 
+	compans=${RPSarray[$RANDOM % ${#RPSarray[@]} ]}
+	echo 
 
+}
 
+function player {
+    echo =========================================
+    echo "              ---Menu---                "
+    echo =========================================
+    echo "          First to five RPS               "
+    echo 
+    echo "1 = Rock "
+	echo "2 = Paper "
+	echo "3 = Scissors"
+	read -p "Select your choice:  " playerans
+	echo "========================================="
+}
 
-#Input your choice
-echo ---------------------------------------
-read -p "Rock Paper Scissors.. " userchoice
+function results {
+    if [[ $playerans -eq $compans ]]
+        then 
+        echo "Its a tie"
 
+    elif [[ $playerans -eq 1 ]] && [[ $compans -eq 2 ]]
+    then 
+        echo 
+        echo "You played Rock!"
+        echo "Computer played Paper!"
+        echo "You lose!"
+        compwins=$(( $compwins + 1))
+    
+    elif [[ $playerans -eq 1 ]] && [[ $compans -eq 3 ]]
+    then 
+        echo 
+        echo "You played Rock!"
+        echo "Computer played Scissors!"
+        echo "You Win!"
+        userwins=$(( $userwins + 1 ))
+    elif [[ $playerans -eq 2 ]] && [[ $compans -eq 1 ]]
+    then 
+        echo 
+        echo "You played Paper!"
+        echo "Computer played Rock!"
+        echo "You Win!"
+        userwins=$(( $userwins + 1 ))
+    elif [[ $playerans -eq 2 ]] && [[ $compans -eq 3 ]]
+    then 
+        echo 
+        echo "You played Paper!"
+        echo "Computer played Scissors!"
+        echo "You Lose!"
+        compwins=$(( $compwins + 1))
+    elif [[ $playerans -eq 3 ]] && [[ $compans -eq 1 ]]
+    then 
+        echo 
+        echo "You played Scissors!"
+        echo "Computer played Rock!"
+        echo "You Lose!"
+        compwins=$(( $compwins + 1))
+    elif [[ $playerans -eq 3 ]] && [[ $compans -eq 2 ]]
+    then 
+        echo 
+        echo "You played Scissors!"
+        echo "Computer played Paper!"
+        echo "You Win!"
+        userwins=$(( $userwins +1 ))
+fi 
 
+}
 
-
-
-
-
-
-
-# Comp choice var 
-
-compchoice=$((1 + RANDOM % 3))
-
-
-
-	
-# Compares users input with comp choice 
-
-# 1=Rock 2=Paper 3=Scissors
-case $userchoice in
-
-	[rR][oO][cC][kK])
-			if [[ $userchoice = [rR][oO][cC][kK]  && $compchoice -eq 1 ]]
-			
-			then 
-				echo "You played $userchoice"
-				echo "Computer played Rock"
-				echo "You both played Rock! Its a tie!"
-				
-			elif [[ $userchoice = [rR][oO][cC][kK] && $compchoice -eq 2 ]] 
-			
-				then
-					echo "You played $userchoice"
-					echo "Computer played Paper"
-					echo "You lose!" 
-					compwins=$(( $compwins + 1 ))
-					
-			elif [[ $userchoice = [rR][oO][cC][kK] && $compchoice -eq 3 ]] 
-			
-				then
-					echo "You played $userchoice"
-					echo "Computer played Scissors" 
-					echo "You win!" 
-					wins=$(( $wins + 1 ))
-					
-			else 
-				echo "You played $userchoice but the computer said no ..."
-			fi
-			;;
-	[Ss][cC][Ii][Ss][Ss][Oo][Rr][Ss])
-		if [[ $userchoice = [Ss][cC][Ii][Ss][Ss][Oo][Rr][Ss] && $compchoice -eq 3 ]] 
-		
-			then 
-				echo "You played $userchoice"
-				echo "Computer played Scissors"
-				echo "You both played Scissors! Its a tie!"
-			elif [[ $userchoice = [Ss][cC][Ii][Ss][Ss][Oo][Rr][Ss] && $compchoice -eq 2 ]] 
-				then 
-				echo "You played Scissors"
-				echo "Computer played Paper"
-				echo "You win!"
-				wins=$(( $wins + 1 ))
-				
-			elif [[ $userchoice = [Ss][cC][Ii][Ss][Ss][Oo][Rr][Ss] && $compchoice -eq 1 ]] 
-			then
-				echo "You played Scissors"
-				echo "Computer played Rock" 
-				echo "You lose!"
-				compwins=$(( $compwins + 1 ))
-				
-				
-			else
-			echo "You played $userchoice but the computer said no ..."
-		fi
-		;;
-	[Pp][Aa][Pp][Ee][Rr] )
-		if [[ $userchoice = [Pp][Aa][Pp][Ee][Rr] && $compchoice -eq 2 ]] 
-			then
-				echo "You played $userchoice"
-				echo "Computer played Paper" 
-				echo "You both played Paper! Its a tie!"
-			
-			elif [[ $userchoice = [Pp][Aa][Pp][Ee][Rr] && $compchoice -eq 1 ]]
-			then
-				echo "You played $userchoice"
-				echo "Computer played Rock!"
-				echo "You win!"
-				wins=$(( $wins + 1 ))
-				
-			elif [[ $userchoice = [Pp][Aa][Pp][Ee][Rr] && $compchoice -eq 3 ]] 
-			then
-				echo "You played $userchoice"
-				echo "Computer played Scissors"
-				echo "You lose!"
-				compwins=$(( $compwins + 1 ))
-			else 
-			echo "You played $userchoice but the computer said no ..."
-		fi
-			
-esac 
-
-
-echo
-echo "User wins: $wins"
-echo "Comp wins: $compwins"
+function main {
+    computer    
+    player
+    results
+echo " Computer wins: ${compwins}"
+echo " User wins: ${userwins}"
 echo 
+}
 
-done
+until [[ "$userwins" -eq "$goal" ]] || [[ "$compwins" -eq "$goal" ]]
+do
+main 
 
-if [[ "$wins" -eq 3 ]] 
-then 
-	echo
-	echo " Congratulations you won!" 
-	
+done 
+
+
+if [[ $userwins -eq $goal ]]
+then
+    echo "Congratulations you beat the computer!"
+    echo " Thanks for playing Rock , Paper, Scissors."
+    echo "========================================="
+    echo "              By Sam Bisset                                    "
+    echo "========================================="
 else 
-	echo "The computer won! Better look next time!"
+    echo "You'll get him next time"
+    echo "Thanks for playing Rock , Paper, Scissors."
+    echo "========================================="
+    echo "              By Sam Bisset                                    "
+    echo "========================================="
 fi
